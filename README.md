@@ -1,4 +1,4 @@
-# 📝✈️ Paper-Flight
+# ✈️ Paper-Flight
 
 A minimal and creative paper plane game inspired by Flappy Bird — fly through rulers in a nostalgic school-themed world.
 
