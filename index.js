@@ -59,6 +59,18 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// Add touch event for mobile/touchscreen
+document.addEventListener('touchstart', (e) => {
+  e.preventDefault(); // prevent scrolling on touch
+
+  if (gameOver) {
+    resetGame();
+  } else {
+    velocityY = lift;
+  }
+}, { passive: false });
+
+
 function resetGame() {
   bX = 50;
   bY = 150;
@@ -147,9 +159,50 @@ function loop() {
     const p = pipes[i];
     p.x -= 2;
 
-    ctx.fillStyle = 'green';
-    ctx.fillRect(p.x, 0, pipeWidth, p.top);
-    ctx.fillRect(p.x, canvas.height - p.bottom, pipeWidth, p.bottom);
+    // Pencil colors
+const bodyColor = '#f4c542';     // Pencil body
+const eraserColor = '#ff6666';   // Eraser
+const tipColor = '#444';         // Pencil tip
+const tipHeight = 20;
+const eraserHeight = 10;
+
+// === TOP PENCIL ===
+// Body
+ctx.fillStyle = bodyColor;
+ctx.fillRect(p.x, 0, pipeWidth, p.top - tipHeight - eraserHeight);
+
+// Eraser
+ctx.fillStyle = eraserColor;
+ctx.fillRect(p.x, p.top - tipHeight - eraserHeight, pipeWidth, eraserHeight);
+
+// Tip (triangle)
+ctx.fillStyle = tipColor;
+ctx.beginPath();
+ctx.moveTo(p.x, p.top - tipHeight);
+ctx.lineTo(p.x + pipeWidth / 2, p.top);
+ctx.lineTo(p.x + pipeWidth, p.top - tipHeight);
+ctx.closePath();
+ctx.fill();
+
+// === BOTTOM PENCIL ===
+// Body
+ctx.fillStyle = bodyColor;
+ctx.fillRect(p.x, canvas.height - p.bottom + tipHeight + eraserHeight, pipeWidth, p.bottom - tipHeight - eraserHeight);
+
+// Eraser
+ctx.fillStyle = eraserColor;
+ctx.fillRect(p.x, canvas.height - p.bottom + tipHeight, pipeWidth, eraserHeight);
+
+// Tip (triangle)
+ctx.fillStyle = tipColor;
+ctx.beginPath();
+ctx.moveTo(p.x, canvas.height - p.bottom + tipHeight);
+ctx.lineTo(p.x + pipeWidth / 2, canvas.height - p.bottom);
+ctx.lineTo(p.x + pipeWidth, canvas.height - p.bottom + tipHeight);
+ctx.closePath();
+ctx.fill();
+
+
 
     if (
       bX < p.x + pipeWidth &&
@@ -199,7 +252,7 @@ document.addEventListener('keydown', (e) => {
 async function startGame() {
   highestScore = await getHighestScore();
   console.log("Highest score loaded:", highestScore);
-  pipe();
+  // pipe();  y
   loop();
 }
 
