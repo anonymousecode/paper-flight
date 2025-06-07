@@ -25,13 +25,16 @@ window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
 // Bird
+const birdImg = new Image();
+birdImg.src = 'images/plane.png'; // correct relative path
+
 let bX = 50;
 let bY = 150;
-const bWidth = 30;
-const bHeight = 30;
+const bWidth = 80;
+const bHeight = 40;
 let velocityY = 0;
-const gravity = 0.2;
-const lift = -5;
+const gravity = 0.1;
+const lift = -4;
 
 // Pipes
 const pipeWidth = 50;
@@ -113,7 +116,7 @@ let gameOver = false;
 function loop() {
   if (gameOver) {
     ctx.fillStyle = 'red';
-    ctx.font = '30px Arial';
+    ctx.font = '40px Bebas Neue';
     ctx.fillText('Game Over', canvas.width / 2 - 70, canvas.height / 2);
     ctx.fillText(`Final Score: ${score}`, canvas.width / 2 - 80, canvas.height / 2 + 40);
 
@@ -138,8 +141,8 @@ function loop() {
   velocityY += gravity;
   bY += velocityY;
 
-  ctx.fillStyle = 'blue';
-  ctx.fillRect(bX, bY, bWidth, bHeight);
+    ctx.drawImage(birdImg, bX, bY, bWidth, bHeight);
+
 
   if (frame % 150 === 0) {
     pipe();
@@ -171,7 +174,7 @@ function loop() {
   }
 
   ctx.fillStyle = 'black';
-  ctx.font = '20px Arial';
+  ctx.font = '30px Bebas Neue';
   ctx.fillText(`Score: ${score}`, 10, 30);
 
   frame++;
