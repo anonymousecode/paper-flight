@@ -18,3 +18,51 @@ canvas {
   display: block;
   margin: 0 auto;
 }
+
+.modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      text-align: center;  
+      font-family: "Bebas Neue", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .modal-content h2{
+      color: red;
+      font-size: 60px;
+    }
+    
+    .modal-content h3{
+      font-size: 30px;
+    }
+
+    .modal-content p{
+      font-size: 24px;
+    }
+
+    .modal button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 20px;
+      cursor: pointer;
+      font-family: "Bebas Neue", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+
+    }
+
